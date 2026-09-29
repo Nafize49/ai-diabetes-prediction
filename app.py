@@ -440,7 +440,11 @@ st.markdown(STYLE, unsafe_allow_html=True)
 @st.cache_resource
 def load_model_data():
     base_dir   = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(base_dir, "model", "diabetes_model.pkl")
+    candidates = [
+        os.path.join(base_dir, "model", "diabetes_model.pkl"),
+        os.path.join(base_dir, "diabetes_model.pkl"),
+    ]
+    model_path = next((p for p in candidates if os.path.exists(p)), candidates[0])
     viz_dir    = os.path.join(base_dir, "visualizations")
     if not os.path.exists(model_path):
         return None, viz_dir

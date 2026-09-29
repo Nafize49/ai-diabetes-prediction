@@ -1,0 +1,30 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# IDE and OS artifacts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Local dev temporary scripts
+check_css.py
+create_deployment_zip.py
+create_submission_zip.py
+generate_screenshots.py
+build_pdf.py
+AI-Based-Diabetes-Prediction-System/
+AI-Based-Diabetes-Prediction-System.zip
+Untitled-1.txt

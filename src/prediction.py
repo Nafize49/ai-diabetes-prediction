@@ -23,14 +23,17 @@ import numpy as np
 def load_model():
     """Loads the trained Random Forest pipeline and metadata from disk."""
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    model_path = os.path.join(base_dir, "model", "diabetes_model.pkl")
+    candidates = [
+        os.path.join(base_dir, "model", "diabetes_model.pkl"),
+        os.path.join(base_dir, "diabetes_model.pkl"),
+    ]
+    for model_path in candidates:
+        if os.path.exists(model_path):
+            return joblib.load(model_path)
 
-    if not os.path.exists(model_path):
-        raise FileNotFoundError(
-            f"Trained model file not found at {model_path}. Run 'python train_model.py' to generate it."
-        )
-
-    return joblib.load(model_path)
+    raise FileNotFoundError(
+        f"Trained model file not found in: {candidates}. Run 'python train_model.py' to generate it."
+    )
 
 
 def predict_patient_risk(

@@ -33,15 +33,37 @@ from sklearn.metrics import (
 )
 from sklearn.pipeline import Pipeline
 
-from data_preprocessing import (
-    load_dataset,
-    inspect_dataset,
-    clean_dataset,
-    prepare_features_and_target,
-    build_preprocessor,
-    get_train_test_split,
-    CORE_FEATURES
-)
+try:
+    from src.preprocessing import (
+        load_dataset,
+        inspect_dataset,
+        clean_dataset,
+        prepare_features_and_target,
+        build_preprocessor,
+        get_train_test_split,
+        CORE_FEATURES
+    )
+except ImportError:
+    try:
+        from preprocessing import (
+            load_dataset,
+            inspect_dataset,
+            clean_dataset,
+            prepare_features_and_target,
+            build_preprocessor,
+            get_train_test_split,
+            CORE_FEATURES
+        )
+    except ImportError:
+        from data_preprocessing import (
+            load_dataset,
+            inspect_dataset,
+            clean_dataset,
+            prepare_features_and_target,
+            build_preprocessor,
+            get_train_test_split,
+            CORE_FEATURES
+        )
 
 # Academic styling: clean white backgrounds, muted slate and blue tones, no neon
 plt.rcParams.update({

@@ -25,7 +25,16 @@ def load_dataset(csv_path: str = None) -> pd.DataFrame:
     """Loads the real diabetes dataset from disk."""
     if csv_path is None:
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        csv_path = os.path.join(base_dir, "dataset", "diabetes_binary_health.csv")
+        candidates = [
+            os.path.join(base_dir, "dataset", "diabetes_binary_health.csv"),
+            os.path.join(base_dir, "diabetes_binary_health.csv"),
+        ]
+        for p in candidates:
+            if os.path.exists(p):
+                csv_path = p
+                break
+        if csv_path is None:
+            csv_path = candidates[0]
 
     if not os.path.exists(csv_path):
         raise FileNotFoundError(f"Dataset not found at {csv_path}")
